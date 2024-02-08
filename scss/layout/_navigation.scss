@@ -1,0 +1,65 @@
+.navigation{
+
+    
+    height: 10rem;
+    background-image: linear-gradient(black, rgb(0, 0, 0));
+    width: 100%;
+
+    
+
+
+    &__container{
+        background-image: linear-gradient(black, rgba(0, 0, 0, 0.925));
+        max-width: 160rem;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        
+
+        &__logo{
+            height: 5rem;
+            transition: all 0.3s;
+
+            &:hover{
+                cursor: pointer;
+                transform: translateY(-0.4rem);
+                transition: all 0.3s;
+            }
+
+        }
+        &__links-list{
+            color: white;
+            font-size: 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-right: 3rem;
+            transform: translateY(0rem);
+           
+
+            &__link{
+                color: $main-color-font;
+                transition: all 0.3s;
+                &:hover{
+                    cursor: pointer;
+                    color: $main-color-font-light;
+                    
+                    transform: translateY(-0.4rem);
+                    transition: all 0.3s;
+
+                }
+
+            }
+
+        }
+
+
+
+
+    }
+
+}

@@ -1,0 +1,63 @@
+.hero-section__container__label{
+    position: absolute;
+    color: $main-color-font;
+    font-size:3rem;
+    transform: translateY(-5rem) translateX(-22rem);
+
+    &__icon{
+        color: white;
+        font-size: 4rem;
+        margin-left: 2rem;
+        transform: translateY(1rem);
+    }
+
+    
+
+   
+
+}
+
+
+.hero-section__container__search-bar{
+    transform: translateY(-5rem) translateX(5rem);
+
+    height: 6rem;
+    width: 80rem;
+
+    font-size: 3rem;
+    font-family: $main-font;
+    color:$main-color-font-light;
+    padding-left: 3rem;
+    
+
+    border-radius: 2rem;
+    background-color: rgba(255, 255, 255, 0.123);
+
+};
+
+.hero-section__container__search-button{
+    position: absolute;
+    height: 6rem;
+    width: 20rem;
+    font-family: $main-font;
+    font-size: 3rem;
+    border-radius: 2rem;
+    border: none;
+    background-image: linear-gradient(purple,rgb(89, 0, 255));
+
+    top:32rem;
+    left:50%;
+
+    transform: translateX(-50%);
+    color:$main-color-font;
+    transition:  all 0.3s;
+
+    &:hover{
+        cursor: pointer;
+        transform: translateX(-50%) scale(1.1);
+        transition:  all 0.3s;
+    }
+
+    
+
+}

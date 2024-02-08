@@ -1,0 +1,20 @@
+{
+  "name": "tedapexels",
+  "version": "1.0.0",
+  "description": "Website for Free stock images",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "author": "Anibal Palacios",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.11.0",
+    "parcel": "^2.11.0"
+  },
+  "dependencies": {
+    "core-js": "^3.35.1",
+    "regenerator-runtime": "^0.14.1"
+  }
+}
