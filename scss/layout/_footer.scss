@@ -29,6 +29,10 @@
             &__tedapexels-logo{
                 height: 5rem;
                 transform: translateX(-0rem);
+                @include respond(phone){
+                    height: 3rem;
+                }
+
                 &:hover{
                     cursor: pointer;
                 }
@@ -37,12 +41,20 @@
 
             &__img-link{
                 transform: translateX(-2rem);
+                @include respond(phone){
+                    height: 3rem;
+                }
+
             }
             &__unsplash-logo{
                 
                 height: 5rem;
                 margin-left: 4rem;
                 filter: invert(100%);
+                @include respond(phone){
+                    height: 3rem;
+                    margin-left: 3rem;
+                }
 
                 &:hover{
                     cursor: pointer;
@@ -78,6 +90,7 @@
         color: rgb(107, 107, 107);
         font-size: 1.3rem;
         text-wrap: balance;
+        padding-bottom: 1rem;
         
 
         &__email-link{

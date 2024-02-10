@@ -21,6 +21,7 @@
     <nav class="navigation">
         <div class="navigation__container">
             <img class="navigation__container__logo" src="/img/logos/logo-black.png">
+            <ion-icon name="menu-outline" class="navigation__container__phone-nav"></ion-icon>
             <ul class="navigation__container__links-list">
                 <a class="navigation__container__links-list__link">Explore</a>
                 <a class="navigation__container__links-list__link">Upload</a>
@@ -32,8 +33,9 @@
     </nav>
     <div class="hero-section">
         <div class="hero-section__container">
-            <label class="hero-section__container__label">Search Images<ion-icon class="hero-section__container__label__icon" name="images-outline"></ion-icon></label>
-            <input class="hero-section__container__search-bar" placeholder="Flowers, Landscapes, Cars, Lakes">
+            <img class="hero-section__container__background-img" src="./img/home/hero-background.jpg">
+            <label for="search-field" class="hero-section__container__label">Search Images<ion-icon class="hero-section__container__label__icon" name="images-outline"></ion-icon></label>
+            <input class="hero-section__container__search-bar" id="search-field"placeholder="Flowers, Landscapes, Cars, Lakes">
             <button class="hero-section__container__search-button">Search</button>
         </div>
     </div>

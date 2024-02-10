@@ -11,6 +11,10 @@
         transform: translateY(1rem);
     }
 
+    @include respond(tab-port){
+        transform: translateY(-12rem) translateX(3rem);
+    }
+
 }
 
 
@@ -28,6 +32,10 @@
 
     border-radius: 2rem;
     background-color: rgba(255, 255, 255, 0.123);
+
+    @include respond(tab-land){
+        width: 30rem;
+    }
 
 };
 
