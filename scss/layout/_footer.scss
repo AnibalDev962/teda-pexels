@@ -1,6 +1,96 @@
 .footer{
-    background-color: rgb(39, 39, 39);
+    background-color: black;
+    
     width: 100%;
+    padding-left: 3rem;
+    padding-right: 3rem;
     height: 40rem;
     overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    &__containers{
+        background-color: black;
+        height: 80%;
+        width: 100%;
+        
+        display: flex;
+      
+        &__left{
+            width: 100%;
+            
+            display: flex;
+            flex-direction: column;
+            align-items: baseline;
+            justify-content: center;
+            gap:2rem;
+
+            &__tedapexels-logo{
+                height: 5rem;
+                transform: translateX(-0rem);
+                &:hover{
+                    cursor: pointer;
+                }
+
+            }
+
+            &__img-link{
+                transform: translateX(-2rem);
+            }
+            &__unsplash-logo{
+                
+                height: 5rem;
+                margin-left: 4rem;
+                filter: invert(100%);
+
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+
+        }
+        &__right{
+            width: 100%;
+           
+            display: flex;
+            flex-direction: column;
+            align-items: baseline;
+            justify-content: center;
+            gap:2rem;
+
+            &__footer-link{
+                color: rgb(95, 95, 95);
+                font-size: 1.8rem;
+                list-style: none;
+                text-decoration: none;
+
+                &:hover{
+                    cursor: pointer;
+                    color: white;
+                }
+            }
+
+        }
+
+    }
+    &__credits{
+        color: rgb(107, 107, 107);
+        font-size: 1.3rem;
+        text-wrap: balance;
+        
+
+        &__email-link{
+            text-decoration: none;
+            color: $main-color-font;
+        };
+        &__footer__credits__year-span{
+            color:red;
+        };
+
+    };
+    
+
+    
+
 }

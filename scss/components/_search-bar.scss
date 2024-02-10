@@ -2,7 +2,7 @@
     position: absolute;
     color: $main-color-font;
     font-size:3rem;
-    transform: translateY(-5rem) translateX(-22rem);
+    transform: translateY(-5rem) translateX(-26rem);
 
     &__icon{
         color: white;
@@ -11,18 +11,14 @@
         transform: translateY(1rem);
     }
 
-    
-
-   
-
 }
 
 
 .hero-section__container__search-bar{
-    transform: translateY(-5rem) translateX(5rem);
+    transform: translateY(-5rem);
 
     height: 6rem;
-    width: 80rem;
+    width: 55rem;
 
     font-size: 3rem;
     font-family: $main-font;
@@ -45,7 +41,7 @@
     border: none;
     background-image: linear-gradient(purple,rgb(89, 0, 255));
 
-    top:32rem;
+    top:52%;
     left:50%;
 
     transform: translateX(-50%);

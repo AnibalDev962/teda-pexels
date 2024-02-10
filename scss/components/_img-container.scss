@@ -1,0 +1,37 @@
+.main{
+    width: 100%;
+    height: auto;
+}
+
+.main__results-container{
+
+    background-color: $color-grey-light;
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+
+    width: 100%;
+    height: auto;
+
+    display: grid;
+    position: relative;
+
+    align-items: center;
+    justify-items: center;
+
+    grid-template-columns: repeat(auto-fit,minmax(25rem, 1fr));
+
+    &__el{
+        width: 25rem;
+        height: auto;
+        overflow: hidden;
+       
+        &__img{
+            width: 100%;
+        
+        }
+
+
+    }
+
+
+}
