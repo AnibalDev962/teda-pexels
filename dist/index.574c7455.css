@@ -248,11 +248,13 @@ body {
   font-size: 1.8rem;
   text-decoration: none;
   list-style: none;
+  transition: all .3s;
 }
 
 .footer__containers__right__footer-link:hover {
   cursor: pointer;
   color: #fff;
+  transition: all .3s;
 }
 
 .footer__credits {

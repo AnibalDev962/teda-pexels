@@ -76,10 +76,12 @@
                 font-size: 1.8rem;
                 list-style: none;
                 text-decoration: none;
+                transition: all 0.3s;
 
                 &:hover{
                     cursor: pointer;
                     color: white;
+                    transition: all 0.3s;
                 }
             }
 

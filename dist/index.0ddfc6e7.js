@@ -585,12 +585,22 @@ var _searchViewJs = require("./views/searchView.js");
 var _searchViewJsDefault = parcelHelpers.interopDefault(_searchViewJs);
 var _resultsViewJs = require("./views/resultsView.js");
 var _resultsViewJsDefault = parcelHelpers.interopDefault(_resultsViewJs);
-const search = function(query) {
-    _modelJs.loadResults(query);
+const controlSearchAndRender = async function(query) {
+    try {
+        ///search results//
+        await _modelJs.loadResults(query);
+        //render results//
+        (0, _resultsViewJsDefault.default).render();
+    } catch (err) {
+        console.log(err);
+    }
 };
+///❤️❤️❤️initializing❤️❤️❤️////
 const init = function() {
-    (0, _searchViewJsDefault.default).addHandlerSearch(search);
-}; /*  init();  */ 
+    //1 search and load results//
+    (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchAndRender);
+};
+init();
 
 },{"./model.js":"aRvaB","./views/searchView.js":"ksHfm","./views/resultsView.js":"2AF22","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aRvaB":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -600,7 +610,7 @@ parcelHelpers.export(exports, "loadResults", ()=>loadResults);
 var _configJs = require("./config.js");
 const state = {
     query: "",
-    results: [],
+    results: {},
     page: 1,
     resultsPerPage: ""
 };
@@ -608,10 +618,15 @@ const loadResults = async function(query) {
     try {
         state.query = query;
         console.log(`searching with query ${query}`);
-        const data = await fetch(`https://api.unsplash.com/search/photos?page=1&query=${query}&client_id=${_configJs.apiAccessKey}`);
-        const results = await data.json();
-        console.log(results);
-        state.results = results;
+        const response = await fetch(`https://api.unsplash.com/search/photos?page=1&query=${query}&client_id=${_configJs.apiAccessKey}`);
+        const data = await response.json();
+        state.results = data.results.map((el)=>{
+            return {
+                imgid: el.id,
+                imgUrl: el.urls.small
+            };
+        });
+        console.log(state.results);
     } catch (err) {
         console.log(err);
         throw err;
@@ -668,11 +683,15 @@ class SearchView extends (0, _viewJsDefault.default) {
     _searchButton = document.querySelector(".hero-section__container__search-button");
     _searchBar = document.querySelector(".hero-section__container__search-bar");
     _query = "";
-    setQuery() {
-        this._query = this._searchBar.value;
-    }
     addHandlerSearch(handler) {
-        this._searchButton.addEventListener("click", handler);
+        const searchBar = this._searchBar;
+        this._searchButton.addEventListener("click", function(e) {
+            let query = this._searchBar;
+            e.preventDefault();
+            //1//ADD RENDER ERORR HERE///TODO☀️
+            //2//execute search//
+            handler(searchBar.value);
+        });
     }
 }
 exports.default = new SearchView();
@@ -680,11 +699,13 @@ exports.default = new SearchView();
 },{"./view.js":"jufMs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jufMs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+var _modelJs = require("../model.js");
 class View {
     _data;
     render(data) {
-        console.log("do something");
-        this._data = data;
+        this._data = _modelJs.state.results;
+        console.log(this._data);
+        this.generateMarkup(this._data);
     }
     renderError() {
         //render error//
@@ -702,13 +723,21 @@ class View {
 }
 exports.default = View;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2AF22":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../model.js":"aRvaB"}],"2AF22":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
 var _viewJs = require("./view.js");
 var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
 class ResultsView extends (0, _viewJsDefault.default) {
     _parentElemenet = document.querySelector(".main__results-container");
+    generateMarkup(data) {
+        data.forEach((element)=>{
+            const markup = `<img src="${element.imgUrl}"></img>`;
+            this._parentElemenet.insertAdjacentHTML("afterbegin", markup);
+        });
+    }
 }
+exports.default = new ResultsView();
 
 },{"./view.js":"jufMs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ligTe","CE27q"], "CE27q", "parcelRequire73d9")
 

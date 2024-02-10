@@ -1,9 +1,14 @@
+import * as model from '../model.js';
+
 export default class View{
     _data;
 
     render(data){
-        console.log('do something');
-        this._data=data;
+        this._data=model.state.results;
+        console.log(this._data);
+
+        this.generateMarkup(this._data);
+
 
     };
 

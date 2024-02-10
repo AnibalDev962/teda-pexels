@@ -6,11 +6,21 @@ class SearchView extends View{
     _searchBar=document.querySelector('.hero-section__container__search-bar')
     _query='';
 
-    setQuery(){
-        this._query=this._searchBar.value;
-    }
+  
     addHandlerSearch(handler){
-        this._searchButton.addEventListener('click',handler);
+        const searchBar=this._searchBar;
+        
+        this._searchButton.addEventListener('click',function(e){
+            let query=this._searchBar;
+            e.preventDefault();
+            
+        //1//ADD RENDER ERORR HERE///TODO☀️
+
+        //2//execute search//
+
+        handler(searchBar.value);
+
+        });
     }
 
   
