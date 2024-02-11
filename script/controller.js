@@ -8,21 +8,28 @@ const controlSearchAndRender=async function(query){
    ///search results//
 await model.loadResults(query);
    //render results//
+resultsView.displayOrHideImgContainer();
 resultsView.render();
+resultsView.displayLoadMoreButton('display');
 
  }catch(err){
    console.log(err);
  }
 }
 
-
+const loadMoreFunction=function(){
+   console.log('loading more');
+}
 
 ///❤️❤️❤️initializing❤️❤️❤️////
 const init=function(){
+   searchView.renderYear();
    //1 search and load results//
    searchView.addHandlerSearch(controlSearchAndRender)
-   
+   //2 load more functionality activated//
+   resultsView.addHandlerLoadMore(loadMoreFunction);
 
+   
 };
 
 init(); 

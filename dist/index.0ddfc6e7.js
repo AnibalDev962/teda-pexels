@@ -590,15 +590,23 @@ const controlSearchAndRender = async function(query) {
         ///search results//
         await _modelJs.loadResults(query);
         //render results//
+        (0, _resultsViewJsDefault.default).displayOrHideImgContainer();
         (0, _resultsViewJsDefault.default).render();
+        (0, _resultsViewJsDefault.default).displayLoadMoreButton("display");
     } catch (err) {
         console.log(err);
     }
 };
+const loadMoreFunction = function() {
+    console.log("loading more");
+};
 ///❤️❤️❤️initializing❤️❤️❤️////
 const init = function() {
+    (0, _searchViewJsDefault.default).renderYear();
     //1 search and load results//
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchAndRender);
+    //2 load more functionality activated//
+    (0, _resultsViewJsDefault.default).addHandlerLoadMore(loadMoreFunction);
 };
 init();
 
@@ -720,6 +728,13 @@ class View {
     renderSpiner() {
         const markup = `<div></div>`;
     }
+    renderYear() {
+        const dateForFooter = new Date();
+        const yearForFooter = dateForFooter.getFullYear();
+        //entering the year to the footer//
+        const spanForYearInTheHtml = document.querySelector(".footer__credits__year-span");
+        spanForYearInTheHtml.textContent = yearForFooter;
+    }
 }
 exports.default = View;
 
@@ -730,10 +745,25 @@ var _viewJs = require("./view.js");
 var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
 class ResultsView extends (0, _viewJsDefault.default) {
     _parentElemenet = document.querySelector(".main__results-container");
+    _loadMoreButton = document.querySelector(".main__results-container__load-more-button");
     generateMarkup(data) {
         data.forEach((element)=>{
-            const markup = `<img src="${element.imgUrl}"></img>`;
+            const markup = ` <div class="main__results-container__el">
+            <img class="main__results-container__el__img" src="${element.imgUrl}">
+        </div>`;
             this._parentElemenet.insertAdjacentHTML("afterbegin", markup);
+        });
+    }
+    displayLoadMoreButton(action) {
+        if (action === "display") this._loadMoreButton.classList.add("load-more-visible");
+        else if (action === "hide") this._loadMoreButton.classList.remove("load-more-visible");
+    }
+    displayOrHideImgContainer(action) {
+        /*  img-container-hidden */ this._parentElemenet.classList.remove("img-container-hidden");
+    }
+    addHandlerLoadMore(handler) {
+        this._loadMoreButton.addEventListener("click", function() {
+            console.log("loading-more");
         });
     }
 }

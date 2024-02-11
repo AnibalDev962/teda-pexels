@@ -22,7 +22,6 @@ class SearchView extends View{
 
         });
     }
-
   
 
 }

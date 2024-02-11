@@ -5,9 +5,11 @@
 
 .main__results-container{
 
+    position: relative;
+
     background-color: $color-grey-light;
     padding-top: 10rem;
-    padding-bottom: 10rem;
+    padding-bottom: 10rem; 
 
     width: 100%;
     height: auto;
@@ -63,6 +65,37 @@
 
 
     }
+    &__load-more-button{
+        opacity: 0;
+        visibility: hidden; 
+        position: absolute;
+        bottom: 0rem;
+        height: 10rem;
+        width: 100%;
+        background-color: rgb(124, 0, 0);
+        color: white;
+        font-family:$main-font;
+        font-size: 2rem;
+        transition: all 0.3s;
+        border: none;
+        &:hover{
+            cursor: pointer;
+            background-color: rgb(255, 0, 0);
+            color: white;
+            transition: all 0.3s;
+        }
+    }
+   
 
+}
 
+//functionality//
+
+.load-more-visible{ //load more button
+    opacity: 1;
+    visibility: visible;
+}
+
+.img-container-hidden{
+    display: none;
 }

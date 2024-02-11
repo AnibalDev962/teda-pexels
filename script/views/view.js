@@ -28,5 +28,17 @@ export default class View{
         const markup=`<div></div>`
     }
 
+    renderYear(){
+        
+      const dateForFooter=new Date();
+
+      const yearForFooter=dateForFooter.getFullYear();
+      //entering the year to the footer//
+
+      const spanForYearInTheHtml=document.querySelector('.footer__credits__year-span');
+      spanForYearInTheHtml.textContent=yearForFooter;
+
+    }
+
 
 }
