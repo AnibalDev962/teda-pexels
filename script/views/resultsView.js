@@ -3,6 +3,8 @@ import View from './view.js';
 class ResultsView extends View {
     _parentElemenet=document.querySelector('.main__results-container');
     _loadMoreButton=document.querySelector('.main__results-container__load-more-button');
+    _goUpButton=document.querySelector('.main__results-container__go-up-button');
+    _sectionZero=document.querySelector('.navigation');
 
      generateMarkup(data){
         data.forEach(element => {
@@ -23,7 +25,7 @@ class ResultsView extends View {
 
     displayOrHideImgContainer(action){
        /*  img-container-hidden */
-       this._parentElemenet.classList.remove('img-container-hidden');
+       this._parentElemenet.classList.remove('img-container-hidden');//☀️TODO ADD HIDE VERSION OF THIS FUNCTION/
 
     }
 
@@ -33,9 +35,12 @@ class ResultsView extends View {
        })
     }
 
-
-
-
-}
+    addHandlerMoveUp(handler){
+      this._goUpButton.addEventListener('click',function(){
+         console.log('go up clicked');
+         
+      })
+    }
+};
 
 export default new ResultsView();

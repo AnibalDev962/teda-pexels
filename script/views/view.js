@@ -40,5 +40,9 @@ export default class View{
 
     }
 
+    scrollToSection(section=this._parentElement){
+        section.scrollIntoView({ behavior: 'smooth' });
+    };
+
 
 }

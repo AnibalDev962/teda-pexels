@@ -11,6 +11,7 @@ await model.loadResults(query);
 resultsView.displayOrHideImgContainer();
 resultsView.render();
 resultsView.displayLoadMoreButton('display');
+searchView.scrollToSection();
 
  }catch(err){
    console.log(err);
@@ -21,6 +22,12 @@ const loadMoreFunction=function(){
    console.log('loading more');
 }
 
+const goUp=function(parameter){
+  searchView.scrollToSection(parameter);
+}
+
+
+
 ///❤️❤️❤️initializing❤️❤️❤️////
 const init=function(){
    searchView.renderYear();
@@ -28,6 +35,8 @@ const init=function(){
    searchView.addHandlerSearch(controlSearchAndRender)
    //2 load more functionality activated//
    resultsView.addHandlerLoadMore(loadMoreFunction);
+   //3activate go up button//
+   resultsView.addHandlerMoveUp(goUp);
 
    
 };

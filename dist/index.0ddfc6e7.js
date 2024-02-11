@@ -593,12 +593,16 @@ const controlSearchAndRender = async function(query) {
         (0, _resultsViewJsDefault.default).displayOrHideImgContainer();
         (0, _resultsViewJsDefault.default).render();
         (0, _resultsViewJsDefault.default).displayLoadMoreButton("display");
+        (0, _searchViewJsDefault.default).scrollToSection();
     } catch (err) {
         console.log(err);
     }
 };
 const loadMoreFunction = function() {
     console.log("loading more");
+};
+const goUp = function(parameter) {
+    (0, _searchViewJsDefault.default).scrollToSection(parameter);
 };
 ///❤️❤️❤️initializing❤️❤️❤️////
 const init = function() {
@@ -607,6 +611,8 @@ const init = function() {
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchAndRender);
     //2 load more functionality activated//
     (0, _resultsViewJsDefault.default).addHandlerLoadMore(loadMoreFunction);
+    //3activate go up button//
+    (0, _resultsViewJsDefault.default).addHandlerMoveUp(goUp);
 };
 init();
 
@@ -735,6 +741,11 @@ class View {
         const spanForYearInTheHtml = document.querySelector(".footer__credits__year-span");
         spanForYearInTheHtml.textContent = yearForFooter;
     }
+    scrollToSection(section = this._parentElement) {
+        section.scrollIntoView({
+            behavior: "smooth"
+        });
+    }
 }
 exports.default = View;
 
@@ -746,6 +757,8 @@ var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
 class ResultsView extends (0, _viewJsDefault.default) {
     _parentElemenet = document.querySelector(".main__results-container");
     _loadMoreButton = document.querySelector(".main__results-container__load-more-button");
+    _goUpButton = document.querySelector(".main__results-container__go-up-button");
+    _sectionZero = document.querySelector(".navigation");
     generateMarkup(data) {
         data.forEach((element)=>{
             const markup = ` <div class="main__results-container__el">
@@ -759,11 +772,16 @@ class ResultsView extends (0, _viewJsDefault.default) {
         else if (action === "hide") this._loadMoreButton.classList.remove("load-more-visible");
     }
     displayOrHideImgContainer(action) {
-        /*  img-container-hidden */ this._parentElemenet.classList.remove("img-container-hidden");
+        /*  img-container-hidden */ this._parentElemenet.classList.remove("img-container-hidden"); //☀️TODO ADD HIDE VERSION OF THIS FUNCTION/
     }
     addHandlerLoadMore(handler) {
         this._loadMoreButton.addEventListener("click", function() {
             console.log("loading-more");
+        });
+    }
+    addHandlerMoveUp(handler) {
+        this._goUpButton.addEventListener("click", function() {
+            console.log("go up clicked");
         });
     }
 }

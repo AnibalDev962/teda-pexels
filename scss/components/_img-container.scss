@@ -4,6 +4,7 @@
 }
 
 .main__results-container{
+    
 
     position: relative;
 
@@ -83,6 +84,28 @@
             background-color: rgb(255, 0, 0);
             color: white;
             transition: all 0.3s;
+        }
+    }
+    &__go-up-button{
+        position: sticky;
+
+        bottom: 2rem;
+        left: 90%;
+
+        height: 7rem;
+        width: 7rem;
+        border-radius: 4rem;
+        border: none;
+        background-color: grey;
+        opacity: .7;
+        z-index: 15;
+        transition: all 0.3s;
+
+        &:hover{
+            cursor: pointer;
+            transform: scale(1.1);
+            transition: all 0.3s;
+
         }
     }
    

@@ -10,6 +10,7 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    
 
     @include respond(phone){
         height: 80dvh;
@@ -31,6 +32,7 @@
         width: 110%;
         -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
         filter: blur(5px);
+       
         
         @include respond(tab-land){
             width: 150%;
