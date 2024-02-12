@@ -4,11 +4,9 @@ export default class View{
     _data;
 
     render(data){
-        this._data=model.state.results;
-        console.log(this._data);
-
+       
+        this._data=model.state.results.els;
         this.generateMarkup(this._data);
-
 
     };
 

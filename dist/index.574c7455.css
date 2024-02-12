@@ -39,70 +39,12 @@ body {
 }
 
 .main__results-container {
-  grid-gap: 1rem;
   background-color: #383838;
-  grid-template-columns: repeat(auto-fit, minmax(50rem, 1fr));
-  place-items: center;
   width: 100%;
   height: auto;
   padding-top: 10rem;
   padding-bottom: 10rem;
-  display: grid;
   position: relative;
-}
-
-@media only screen and (width >= 112.5em) {
-  .main__results-container {
-    grid-template-columns: repeat(auto-fit, minmax(70rem, 1fr));
-  }
-}
-
-@media only screen and (width <= 75em) {
-  .main__results-container {
-    grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
-  }
-}
-
-@media only screen and (width <= 37.5em) {
-  .main__results-container {
-    grid-template-columns: repeat(auto-fit, minmax(32rem, 1fr));
-  }
-}
-
-.main__results-container__el {
-  width: 50rem;
-  height: auto;
-  margin: 1rem;
-  transition: all .3s;
-  overflow: hidden;
-}
-
-.main__results-container__el:hover {
-  cursor: pointer;
-  transition: all .3s;
-  transform: scale(1.1);
-}
-
-@media only screen and (width >= 112.5em) {
-  .main__results-container__el {
-    width: 70rem;
-  }
-}
-
-@media only screen and (width <= 75em) {
-  .main__results-container__el {
-    width: 40rem;
-  }
-}
-
-@media only screen and (width <= 37.5em) {
-  .main__results-container__el {
-    width: 32rem;
-  }
-}
-
-.main__results-container__el__img {
-  width: 100%;
 }
 
 .main__results-container__load-more-button {
@@ -161,6 +103,70 @@ body {
 
 .img-container-hidden {
   display: none;
+}
+
+.img-container-forced {
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(50rem, 1fr));
+  place-items: center;
+  width: 100%;
+  height: auto;
+  display: grid;
+  position: relative;
+}
+
+@media only screen and (width >= 112.5em) {
+  .img-container-forced {
+    grid-template-columns: repeat(auto-fit, minmax(70rem, 1fr));
+  }
+}
+
+@media only screen and (width <= 75em) {
+  .img-container-forced {
+    grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
+  }
+}
+
+@media only screen and (width <= 37.5em) {
+  .img-container-forced {
+    grid-template-columns: repeat(auto-fit, minmax(32rem, 1fr));
+  }
+}
+
+.img-container-forced__el {
+  width: 50rem;
+  height: auto;
+  margin: 1rem;
+  transition: all .3s;
+  overflow: hidden;
+}
+
+.img-container-forced__el:hover {
+  cursor: pointer;
+  transition: all .3s;
+  transform: scale(1.1);
+}
+
+@media only screen and (width >= 112.5em) {
+  .img-container-forced__el {
+    width: 70rem;
+  }
+}
+
+@media only screen and (width <= 75em) {
+  .img-container-forced__el {
+    width: 40rem;
+  }
+}
+
+@media only screen and (width <= 37.5em) {
+  .img-container-forced__el {
+    width: 32rem;
+  }
+}
+
+.img-container-forced__el__img {
+  width: 100%;
 }
 
 .hero-section__container__label {

@@ -625,23 +625,25 @@ parcelHelpers.export(exports, "loadResults", ()=>loadResults);
 var _configJs = require("./config.js");
 const state = {
     query: "",
-    results: {},
+    results: {
+        els: []
+    },
     page: 1,
     resultsPerPage: ""
 };
 const loadResults = async function(query) {
     try {
         state.query = query;
-        console.log(`searching with query ${query}`);
         const response = await fetch(`https://api.unsplash.com/search/photos?page=${state.page}&query=${query}&client_id=${_configJs.apiAccessKey}`);
         const data = await response.json();
-        state.results = data.results.map((el)=>{
+        let tempData = {};
+        tempData = data.results.map((el)=>{
             return {
                 imgid: el.id,
                 imgUrl: el.urls.small
             };
         });
-        console.log(state.results);
+        for (const [i, el] of tempData.entries())state.results.els.push(el);
     } catch (err) {
         console.log(err);
         throw err;
@@ -718,8 +720,7 @@ var _modelJs = require("../model.js");
 class View {
     _data;
     render(data) {
-        this._data = _modelJs.state.results;
-        console.log(this._data);
+        this._data = _modelJs.state.results.els;
         this.generateMarkup(this._data);
     }
     renderError() {
@@ -758,16 +759,22 @@ var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
 var _modelJs = require("../model.js");
 class ResultsView extends (0, _viewJsDefault.default) {
     _parentElemenet = document.querySelector(".main__results-container");
+    _parentElement = document.querySelector(".img-container-forced");
     _loadMoreButton = document.querySelector(".main__results-container__load-more-button");
     _goUpButton = document.querySelector(".main__results-container__go-up-button");
     _sectionZero = document.querySelector(".navigation");
     generateMarkup(data) {
-        data.forEach((element)=>{
-            const markup = ` <div class="main__results-container__el">
-            <img class="main__results-container__el__img" src="${element.imgUrl}">
-        </div>`;
-            this._parentElemenet.insertAdjacentHTML("afterbegin", markup);
+        this._parentElement.innerHTML = "";
+        const renderingEls = data.forEach((element)=>{
+            let markup = `<div class="img-container-forced__el">
+            <img class="img-container-forced__el__img" src="${element.imgUrl}">
+             </div>`;
+            this._parentElement.insertAdjacentHTML("beforeend", markup);
         });
+    }
+    clearParent() {
+        this._parentElement = "";
+        console.log("clared\uD83C\uDF06");
     }
     displayLoadMoreButton(action) {
         if (action === "display") this._loadMoreButton.classList.add("load-more-visible");
@@ -776,10 +783,15 @@ class ResultsView extends (0, _viewJsDefault.default) {
     displayOrHideImgContainer(action) {
         /*  img-container-hidden */ this._parentElemenet.classList.remove("img-container-hidden"); //☀️TODO ADD HIDE VERSION OF THIS FUNCTION/
     }
-    displayMoreImages() {
-        _modelJs.state.page++;
-        console.log(_modelJs.state.page);
-        this.render();
+    async displayMoreImages() {
+        try {
+            await _modelJs.state.page++;
+            console.log(_modelJs.state.page);
+            await _modelJs.loadResults(_modelJs.state.query);
+            this.render(_modelJs.state.results.els);
+        } catch (err) {
+            console.log(err);
+        }
     }
     addHandlerLoadMore(handler) {
         this._loadMoreButton.addEventListener("click", handler);

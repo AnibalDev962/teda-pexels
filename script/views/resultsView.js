@@ -3,18 +3,28 @@ import * as model from '../model.js';
 
 class ResultsView extends View {
     _parentElemenet=document.querySelector('.main__results-container');
+    _parentElement=document.querySelector('.img-container-forced');
     _loadMoreButton=document.querySelector('.main__results-container__load-more-button');
     _goUpButton=document.querySelector('.main__results-container__go-up-button');
     _sectionZero=document.querySelector('.navigation');
-    
+   
 
-     generateMarkup(data){
-        data.forEach(element => {
-            const markup=` <div class="main__results-container__el">
-            <img class="main__results-container__el__img" src="${element.imgUrl}">
-        </div>`
-            this._parentElemenet.insertAdjacentHTML('afterbegin',markup);
-        });
+    generateMarkup(data){
+        this._parentElement.innerHTML='';
+          const renderingEls=data.forEach(element => {
+            
+            let markup=`<div class="img-container-forced__el">
+            <img class="img-container-forced__el__img" src="${element.imgUrl}">
+             </div>`
+            this._parentElement.insertAdjacentHTML('beforeend',markup); 
+   
+        })
+        
+     };
+
+     clearParent(){
+      this._parentElement='';
+      console.log('clared🌆')
      }
 
      displayLoadMoreButton(action){
@@ -31,12 +41,18 @@ class ResultsView extends View {
 
     }
 
-    displayMoreImages(){
-     model.state.page++;
-     console.log(model.state.page);
-     this.render();
+    async displayMoreImages(){
+      try{ 
+         await model.state.page++;
+         console.log(model.state.page);
+         await model.loadResults(model.state.query);
+     
+         this.render(model.state.results.els);
+      }catch(err){
+      console.log(err);
+      }
 
-    }
+   }
 
     addHandlerLoadMore(handler){
        this._loadMoreButton.addEventListener('click',handler);
