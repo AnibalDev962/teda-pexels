@@ -629,7 +629,8 @@ const state = {
         els: []
     },
     page: 1,
-    resultsPerPage: ""
+    resultsPerPage: "",
+    searching: false
 };
 const loadResults = async function(query) {
     try {

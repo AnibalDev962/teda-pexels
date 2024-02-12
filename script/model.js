@@ -7,6 +7,7 @@ export const state={
     },
     page:1,
     resultsPerPage:'',
+    searching:false,
 
 };
 
