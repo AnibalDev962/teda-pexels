@@ -23,7 +23,7 @@ class ResultsView extends View {
      };
 
      clearParent(){
-      this._parentElement='';
+      this._parentElement.textContent='';
       console.log('clared🌆')
      }
 

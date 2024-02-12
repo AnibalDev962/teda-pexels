@@ -622,6 +622,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "loadResults", ()=>loadResults);
+parcelHelpers.export(exports, "clearAppState", ()=>clearAppState);
 var _configJs = require("./config.js");
 const state = {
     query: "",
@@ -630,7 +631,7 @@ const state = {
     },
     page: 1,
     resultsPerPage: "",
-    searching: false
+    searching: 0
 };
 const loadResults = async function(query) {
     try {
@@ -649,6 +650,11 @@ const loadResults = async function(query) {
         console.log(err);
         throw err;
     }
+};
+const clearAppState = function() {
+    state.results.els = [];
+    state.page = 1;
+    state.searching = 0;
 };
 
 },{"./config.js":"kwbPS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kwbPS":[function(require,module,exports) {
@@ -696,6 +702,9 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _viewJs = require("./view.js");
 var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
+var _modelJs = require("../model.js");
+var _resultsViewJs = require("./resultsView.js");
+var _resultsViewJsDefault = parcelHelpers.interopDefault(_resultsViewJs);
 class SearchView extends (0, _viewJsDefault.default) {
     _parentElement = document.querySelector(".hero-section__container");
     _searchButton = document.querySelector(".hero-section__container__search-button");
@@ -704,17 +713,18 @@ class SearchView extends (0, _viewJsDefault.default) {
     addHandlerSearch(handler) {
         const searchBar = this._searchBar;
         this._searchButton.addEventListener("click", function(e) {
+            console.log("aceptation");
             let query = this._searchBar;
             e.preventDefault();
-            //1//ADD RENDER ERORR HERE///TODO☀️
-            //2//execute search//
             handler(searchBar.value);
+            _modelJs.clearAppState();
+            (0, _resultsViewJsDefault.default).clearParent();
         });
     }
 }
 exports.default = new SearchView();
 
-},{"./view.js":"jufMs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jufMs":[function(require,module,exports) {
+},{"./view.js":"jufMs","../model.js":"aRvaB","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./resultsView.js":"2AF22"}],"jufMs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _modelJs = require("../model.js");
@@ -774,7 +784,7 @@ class ResultsView extends (0, _viewJsDefault.default) {
         });
     }
     clearParent() {
-        this._parentElement = "";
+        this._parentElement.textContent = "";
         console.log("clared\uD83C\uDF06");
     }
     displayLoadMoreButton(action) {

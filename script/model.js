@@ -1,5 +1,6 @@
 import * as configData from './config.js';
 
+
 export const state={
     query:'',
     results:{
@@ -7,7 +8,7 @@ export const state={
     },
     page:1,
     resultsPerPage:'',
-    searching:false,
+    searching:0, //if more that 0, app will restart search
 
 };
 
@@ -38,3 +39,9 @@ export const loadResults= async function(query){
     }
 }
 
+export const clearAppState=function(){
+    state.results.els=[];
+    state.page=1;
+    state.searching=0;
+
+}

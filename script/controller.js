@@ -13,6 +13,7 @@ resultsView.render();
 resultsView.displayLoadMoreButton('display');
 searchView.scrollToSection();
 
+
  }catch(err){
    console.log(err);
  }

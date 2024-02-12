@@ -1,4 +1,6 @@
 import View from './view.js';
+import * as model from '../model.js';
+import resultsView from './resultsView.js';
 
 class SearchView extends View{
     _parentElement=document.querySelector('.hero-section__container');
@@ -6,22 +8,28 @@ class SearchView extends View{
     _searchBar=document.querySelector('.hero-section__container__search-bar')
     _query='';
 
+
+   
   
     addHandlerSearch(handler){
         const searchBar=this._searchBar;
         
         this._searchButton.addEventListener('click',function(e){
+            console.log('aceptation');
             let query=this._searchBar;
             e.preventDefault();
-            
-        //1//ADD RENDER ERORR HERE///TODO☀️
 
-        //2//execute search//
-
-        handler(searchBar.value);
+                handler(searchBar.value);
+                model.clearAppState();
+                resultsView.clearParent();
+               
 
         });
     }
+
+
+
+   
 
     
   
