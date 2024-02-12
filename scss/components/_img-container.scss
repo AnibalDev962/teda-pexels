@@ -89,6 +89,10 @@
     &__go-up-button{
         position: sticky;
 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         bottom: 2rem;
         left: 90%;
 
@@ -106,6 +110,10 @@
             transform: scale(1.1);
             transition: all 0.3s;
 
+        }
+
+        &__icon{
+            font-size: 6rem;
         }
     }
    

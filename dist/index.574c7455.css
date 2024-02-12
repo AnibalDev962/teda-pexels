@@ -133,9 +133,12 @@ body {
   background-color: gray;
   border: none;
   border-radius: 4rem;
+  justify-content: center;
+  align-items: center;
   width: 7rem;
   height: 7rem;
   transition: all .3s;
+  display: flex;
   position: sticky;
   bottom: 2rem;
   left: 90%;
@@ -145,6 +148,10 @@ body {
   cursor: pointer;
   transition: all .3s;
   transform: scale(1.1);
+}
+
+.main__results-container__go-up-button__icon {
+  font-size: 6rem;
 }
 
 .load-more-visible {

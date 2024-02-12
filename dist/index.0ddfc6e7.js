@@ -599,10 +599,11 @@ const controlSearchAndRender = async function(query) {
     }
 };
 const loadMoreFunction = function() {
-    console.log("loading more");
+    console.log("about to load more");
+    (0, _resultsViewJsDefault.default).displayMoreImages();
 };
-const goUp = function(parameter) {
-    (0, _searchViewJsDefault.default).scrollToSection(parameter);
+const goUp = function() {
+    (0, _searchViewJsDefault.default).scrollToSection((0, _resultsViewJsDefault.default)._sectionZero);
 };
 ///❤️❤️❤️initializing❤️❤️❤️////
 const init = function() {
@@ -632,7 +633,7 @@ const loadResults = async function(query) {
     try {
         state.query = query;
         console.log(`searching with query ${query}`);
-        const response = await fetch(`https://api.unsplash.com/search/photos?page=1&query=${query}&client_id=${_configJs.apiAccessKey}`);
+        const response = await fetch(`https://api.unsplash.com/search/photos?page=${state.page}&query=${query}&client_id=${_configJs.apiAccessKey}`);
         const data = await response.json();
         state.results = data.results.map((el)=>{
             return {
@@ -754,6 +755,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _viewJs = require("./view.js");
 var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
+var _modelJs = require("../model.js");
 class ResultsView extends (0, _viewJsDefault.default) {
     _parentElemenet = document.querySelector(".main__results-container");
     _loadMoreButton = document.querySelector(".main__results-container__load-more-button");
@@ -774,19 +776,22 @@ class ResultsView extends (0, _viewJsDefault.default) {
     displayOrHideImgContainer(action) {
         /*  img-container-hidden */ this._parentElemenet.classList.remove("img-container-hidden"); //☀️TODO ADD HIDE VERSION OF THIS FUNCTION/
     }
+    displayMoreImages() {
+        _modelJs.state.page++;
+        console.log(_modelJs.state.page);
+        this.render();
+    }
     addHandlerLoadMore(handler) {
-        this._loadMoreButton.addEventListener("click", function() {
-            console.log("loading-more");
-        });
+        this._loadMoreButton.addEventListener("click", handler);
     }
     addHandlerMoveUp(handler) {
         this._goUpButton.addEventListener("click", function() {
-            console.log("go up clicked");
+            handler(this._sectionZero);
         });
     }
 }
 exports.default = new ResultsView();
 
-},{"./view.js":"jufMs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ligTe","CE27q"], "CE27q", "parcelRequire73d9")
+},{"./view.js":"jufMs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../model.js":"aRvaB"}]},["ligTe","CE27q"], "CE27q", "parcelRequire73d9")
 
 //# sourceMappingURL=index.0ddfc6e7.js.map

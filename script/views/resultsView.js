@@ -1,10 +1,12 @@
 import View from './view.js';
+import * as model from '../model.js';
 
 class ResultsView extends View {
     _parentElemenet=document.querySelector('.main__results-container');
     _loadMoreButton=document.querySelector('.main__results-container__load-more-button');
     _goUpButton=document.querySelector('.main__results-container__go-up-button');
     _sectionZero=document.querySelector('.navigation');
+    
 
      generateMarkup(data){
         data.forEach(element => {
@@ -29,15 +31,20 @@ class ResultsView extends View {
 
     }
 
+    displayMoreImages(){
+     model.state.page++;
+     console.log(model.state.page);
+     this.render();
+
+    }
+
     addHandlerLoadMore(handler){
-       this._loadMoreButton.addEventListener('click',function(){
-        console.log('loading-more');
-       })
+       this._loadMoreButton.addEventListener('click',handler);
     }
 
     addHandlerMoveUp(handler){
       this._goUpButton.addEventListener('click',function(){
-         console.log('go up clicked');
+         handler(this._sectionZero);
          
       })
     }

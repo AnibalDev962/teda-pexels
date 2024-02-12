@@ -19,11 +19,13 @@ searchView.scrollToSection();
 }
 
 const loadMoreFunction=function(){
-   console.log('loading more');
+   console.log('about to load more')
+   resultsView.displayMoreImages();
+   
 }
 
-const goUp=function(parameter){
-  searchView.scrollToSection(parameter);
+const goUp=function(){
+  searchView.scrollToSection(resultsView._sectionZero);
 }
 
 
