@@ -7,6 +7,7 @@ class ResultsView extends View {
     _loadMoreButton=document.querySelector('.main__results-container__load-more-button');
     _goUpButton=document.querySelector('.main__results-container__go-up-button');
     _sectionZero=document.querySelector('.navigation');
+    _spiner=document.querySelector('.main__results-container__spiner-container');
    
 
     generateMarkup(data, imgSize){
@@ -21,8 +22,7 @@ class ResultsView extends View {
 
                   let markup=`
                   <div class="img-container-forced__el">
-                    
-                    <img class="img-container-forced__el__img" src="${element.imgUrl}">
+                     <img class="img-container-forced__el__img" src="${element.imgUrl}">
                   </div>`
                   ///rendering markup
                   this._parentElement.insertAdjacentHTML('beforeend',markup); 
@@ -30,10 +30,11 @@ class ResultsView extends View {
             }else if(imgSize=='big'){ //big images///
 
 
-                  let markup=`<div class="img-container-forced__el">
-                 
-                  <img class="img-container-forced__el__img" src="${element.imgUrlBig}">
-                   </div>`
+                  let markup=`
+                  <div class="img-container-forced__el">
+
+                    <img class="img-container-forced__el__img" src="${element.imgUrlBig}">
+                  </div>`
                    ///rendering markup
                   this._parentElement.insertAdjacentHTML('beforeend',markup); 
             }
@@ -83,6 +84,16 @@ class ResultsView extends View {
          handler(this._sectionZero);
          
       })
+    }
+
+    toggleSpiner(action){
+
+      if(action==='show'){
+         this._spiner.classList.remove('spiner-container-hidden');
+      }else if(action==='hide'){
+         this._spiner.classList.add('spiner-container-hidden');
+      }
+
     }
 };
 

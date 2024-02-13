@@ -10,7 +10,9 @@ await model.loadResults(query);
    //render results//
       
       resultsView.displayOrHideImgContainer();
+     
       resultsView.render();
+      
       resultsView.displayLoadMoreButton('display');
       searchView.scrollToSection();
 

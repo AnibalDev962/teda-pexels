@@ -106,12 +106,34 @@ body {
   font-size: 6rem;
 }
 
+.main__results-container__spiner-container {
+  justify-content: center;
+  align-items: center;
+  width: 10rem;
+  height: 10rem;
+  display: flex;
+  position: sticky;
+  bottom: 50%;
+  left: 50%;
+  transform: translateX(-50%)translateY(50%);
+}
+
+.main__results-container__spiner-container__spiner {
+  color: wheat;
+  z-index: 10;
+  font-size: 5rem;
+  animation-name: spiner;
+  animation-duration: .8s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
 .load-more-visible {
   opacity: 1;
   visibility: visible;
 }
 
-.img-container-hidden {
+.img-container-hidden, .spiner-container-hidden {
   display: none;
 }
 
@@ -237,18 +259,6 @@ body {
   cursor: pointer;
   transition: all .3s;
   transform: translateX(-50%)scale(1.1);
-}
-
-.spiner {
-  color: wheat;
-  z-index: 10;
-  font-size: 5rem;
-  animation-name: spiner;
-  animation-duration: .3s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  position: absolute;
-  top: 10%;
 }
 
 .footer {

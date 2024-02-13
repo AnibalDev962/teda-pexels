@@ -778,6 +778,7 @@ class ResultsView extends (0, _viewJsDefault.default) {
     _loadMoreButton = document.querySelector(".main__results-container__load-more-button");
     _goUpButton = document.querySelector(".main__results-container__go-up-button");
     _sectionZero = document.querySelector(".navigation");
+    _spiner = document.querySelector(".main__results-container__spiner-container");
     generateMarkup(data, imgSize) {
         //1 clean container//
         this._parentElement.innerHTML = "";
@@ -787,16 +788,16 @@ class ResultsView extends (0, _viewJsDefault.default) {
             if (imgSize === "small") {
                 let markup = `
                   <div class="img-container-forced__el">
-                    
-                    <img class="img-container-forced__el__img" src="${element.imgUrl}">
+                     <img class="img-container-forced__el__img" src="${element.imgUrl}">
                   </div>`;
                 ///rendering markup
                 this._parentElement.insertAdjacentHTML("beforeend", markup);
             } else if (imgSize == "big") {
-                let markup = `<div class="img-container-forced__el">
-                 
-                  <img class="img-container-forced__el__img" src="${element.imgUrlBig}">
-                   </div>`;
+                let markup = `
+                  <div class="img-container-forced__el">
+
+                    <img class="img-container-forced__el__img" src="${element.imgUrlBig}">
+                  </div>`;
                 ///rendering markup
                 this._parentElement.insertAdjacentHTML("beforeend", markup);
             }
@@ -829,6 +830,10 @@ class ResultsView extends (0, _viewJsDefault.default) {
         this._goUpButton.addEventListener("click", function() {
             handler(this._sectionZero);
         });
+    }
+    toggleSpiner(action) {
+        if (action === "show") this._spiner.classList.remove("spiner-container-hidden");
+        else if (action === "hide") this._spiner.classList.add("spiner-container-hidden");
     }
 }
 exports.default = new ResultsView();
