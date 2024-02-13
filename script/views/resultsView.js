@@ -9,14 +9,34 @@ class ResultsView extends View {
     _sectionZero=document.querySelector('.navigation');
    
 
-    generateMarkup(data){
+    generateMarkup(data, imgSize){
+      //1 clean container//
         this._parentElement.innerHTML='';
+      //2 looping data received to extract info to generate markup
           const renderingEls=data.forEach(element => {
-            
-            let markup=`<div class="img-container-forced__el">
-            <img class="img-container-forced__el__img" src="${element.imgUrl}">
-             </div>`
-            this._parentElement.insertAdjacentHTML('beforeend',markup); 
+
+            //3 decide what img size to render//SMALL//
+
+            if(imgSize==='small'){
+
+                  let markup=`
+                  <div class="img-container-forced__el">
+                    
+                    <img class="img-container-forced__el__img" src="${element.imgUrl}">
+                  </div>`
+                  ///rendering markup
+                  this._parentElement.insertAdjacentHTML('beforeend',markup); 
+
+            }else if(imgSize=='big'){ //big images///
+
+
+                  let markup=`<div class="img-container-forced__el">
+                 
+                  <img class="img-container-forced__el__img" src="${element.imgUrlBig}">
+                   </div>`
+                   ///rendering markup
+                  this._parentElement.insertAdjacentHTML('beforeend',markup); 
+            }
    
         })
         
@@ -44,7 +64,7 @@ class ResultsView extends View {
     async displayMoreImages(){
       try{ 
          await model.state.page++;
-         console.log(model.state.page);
+        
          await model.loadResults(model.state.query);
      
          this.render(model.state.results.els);

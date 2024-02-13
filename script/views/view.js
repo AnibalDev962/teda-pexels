@@ -2,11 +2,13 @@ import * as model from '../model.js';
 
 export default class View{
     _data;
+    _screenWidth=window.screen.width;
 
     render(data){
        
         this._data=model.state.results.els;
-        this.generateMarkup(this._data);
+        this._screenWidth<600?  this.generateMarkup(this._data,'small'): this.generateMarkup(this._data,'big')
+      
 
     };
 
@@ -23,7 +25,8 @@ export default class View{
 
     }
     renderSpiner(){
-        const markup=`<div></div>`
+        const markup='<ion-icon class="spiner" name="refresh-outline"></ion-icon>'
+
     }
 
     renderYear(){
@@ -36,9 +39,7 @@ export default class View{
       const spanForYearInTheHtml=document.querySelector('.footer__credits__year-span');
       spanForYearInTheHtml.textContent=yearForFooter;
 
-    }
-
-    
+    };
 
     scrollToSection(section=this._parentElement){
         section.scrollIntoView({ behavior: 'smooth' });

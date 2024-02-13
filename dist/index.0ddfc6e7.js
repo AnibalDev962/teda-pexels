@@ -614,6 +614,7 @@ const init = function() {
     (0, _resultsViewJsDefault.default).addHandlerLoadMore(loadMoreFunction);
     //3activate go up button//
     (0, _resultsViewJsDefault.default).addHandlerMoveUp(goUp);
+//4activate reading screen witdth for responsivenes//
 };
 init();
 
@@ -638,11 +639,13 @@ const loadResults = async function(query) {
         state.query = query;
         const response = await fetch(`https://api.unsplash.com/search/photos?page=${state.page}&query=${query}&client_id=${_configJs.apiAccessKey}`);
         const data = await response.json();
+        console.log(data);
         let tempData = {};
         tempData = data.results.map((el)=>{
             return {
                 imgid: el.id,
-                imgUrl: el.urls.small
+                imgUrl: el.urls.small,
+                imgUrlBig: el.urls.regular
             };
         });
         for (const [i, el] of tempData.entries())state.results.els.push(el);
@@ -730,9 +733,10 @@ parcelHelpers.defineInteropFlag(exports);
 var _modelJs = require("../model.js");
 class View {
     _data;
+    _screenWidth = window.screen.width;
     render(data) {
         this._data = _modelJs.state.results.els;
-        this.generateMarkup(this._data);
+        this._screenWidth < 600 ? this.generateMarkup(this._data, "small") : this.generateMarkup(this._data, "big");
     }
     renderError() {
         //render error//
@@ -745,7 +749,7 @@ class View {
         this._parentElement.innerHTML = ""; //this parent el is the one on the instances///
     }
     renderSpiner() {
-        const markup = `<div></div>`;
+        const markup = '<ion-icon class="spiner" name="refresh-outline"></ion-icon>';
     }
     renderYear() {
         const dateForFooter = new Date();
@@ -774,13 +778,28 @@ class ResultsView extends (0, _viewJsDefault.default) {
     _loadMoreButton = document.querySelector(".main__results-container__load-more-button");
     _goUpButton = document.querySelector(".main__results-container__go-up-button");
     _sectionZero = document.querySelector(".navigation");
-    generateMarkup(data) {
+    generateMarkup(data, imgSize) {
+        //1 clean container//
         this._parentElement.innerHTML = "";
+        //2 looping data received to extract info to generate markup
         const renderingEls = data.forEach((element)=>{
-            let markup = `<div class="img-container-forced__el">
-            <img class="img-container-forced__el__img" src="${element.imgUrl}">
-             </div>`;
-            this._parentElement.insertAdjacentHTML("beforeend", markup);
+            //3 decide what img size to render//SMALL//
+            if (imgSize === "small") {
+                let markup = `
+                  <div class="img-container-forced__el">
+                    
+                    <img class="img-container-forced__el__img" src="${element.imgUrl}">
+                  </div>`;
+                ///rendering markup
+                this._parentElement.insertAdjacentHTML("beforeend", markup);
+            } else if (imgSize == "big") {
+                let markup = `<div class="img-container-forced__el">
+                 
+                  <img class="img-container-forced__el__img" src="${element.imgUrlBig}">
+                   </div>`;
+                ///rendering markup
+                this._parentElement.insertAdjacentHTML("beforeend", markup);
+            }
         });
     }
     clearParent() {
@@ -797,7 +816,6 @@ class ResultsView extends (0, _viewJsDefault.default) {
     async displayMoreImages() {
         try {
             await _modelJs.state.page++;
-            console.log(_modelJs.state.page);
             await _modelJs.loadResults(_modelJs.state.query);
             this.render(_modelJs.state.results.els);
         } catch (err) {

@@ -8,10 +8,11 @@ const controlSearchAndRender=async function(query){
    ///search results//
 await model.loadResults(query);
    //render results//
-resultsView.displayOrHideImgContainer();
-resultsView.render();
-resultsView.displayLoadMoreButton('display');
-searchView.scrollToSection();
+      
+      resultsView.displayOrHideImgContainer();
+      resultsView.render();
+      resultsView.displayLoadMoreButton('display');
+      searchView.scrollToSection();
 
 
  }catch(err){
@@ -40,11 +41,11 @@ const init=function(){
    resultsView.addHandlerLoadMore(loadMoreFunction);
    //3activate go up button//
    resultsView.addHandlerMoveUp(goUp);
+   //4activate reading screen witdth for responsivenes//
+
 
    
 };
 
 init(); 
-
-
 
